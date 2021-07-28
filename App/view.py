@@ -69,7 +69,7 @@ def printMenu():
 
 def optionTwo(cont):
     print("\nCargando información de transporte de singapur ....")
-    controller.loadServices(cont, servicefile)
+    controller.loadServices(cont)
     numedges = controller.totalConnections(cont)
     numvertex = controller.totalStops(cont)
     print('Numero de vertices: ' + str(numvertex))
@@ -81,9 +81,9 @@ def optionThree(cont):
     print('El número de componentes conectados es: ' +
           str(controller.connectedComponents(cont)))
 
-
 def optionFour(cont, initialStation):
     controller.minimumCostPaths(cont, initialStation)
+
 
 
 def optionFive(cont, destStation):
@@ -136,6 +136,10 @@ def thread_cycle():
             msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
             initialStation = input(msg)
             optionFour(cont, initialStation)
+            answer= controller.timeFour(cont, initialStation)
+            print("Tiempo [ms]: ", f"{answer:.3f}", "  ||  ")
+
+
 
         elif int(inputs[0]) == 5:
             destStation = input("Estación destino (Ej: 15151-10): ")
@@ -144,6 +148,8 @@ def thread_cycle():
         elif int(inputs[0]) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")
             optionSix(cont, destStation)
+            answer= controller.timeFour(cont, destStation)
+            print("Tiempo [ms]: ", f"{answer:.3f}", "  ||  ")
 
         elif int(inputs[0]) == 7:
             optionSeven(cont)
